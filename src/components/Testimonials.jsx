@@ -17,7 +17,7 @@ const render_occurence = (content, skill) => {
   return (
     <>
       {splitted_content[0]}{' '}
-      <span class="text-xl font-bold underline decoration-yellow-400 ">
+      <span className="text-xl font-bold underline decoration-yellow-400 ">
         {skill}
       </span>
       {splitted_content.slice(1).join(' ')}
@@ -161,7 +161,7 @@ export function Testimonials() {
                     key={testimonialIndex}
                     href={testimonial.article_id}
                     target="_blank"
-                    class="transform cursor-pointer  transition duration-500 ease-in-out hover:scale-105"
+                    className="transform cursor-pointer  transition duration-500 ease-in-out hover:scale-105"
                   >
                     <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                       <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
