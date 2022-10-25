@@ -9,11 +9,13 @@ import spotify from '@/images/logos/spotify.png'
 import twitter from '@/images/logos/twitter.png'
 import dropbox from '@/images/logos/dropbox.png'
 import netflix from '@/images/logos/netflix.png'
+import pinterest from '@/images/logos/pinterest.png'
 
 const logo_mapper = {
   '9402e160-3516-4ff5-b8c2-5f54e315cdab': twitter,
   'b7219959-a38f-40dd-bb3d-307924519fef': dropbox,
   '275a86e7-79ae-4d42-a2ff-2bdeeba248ea': netflix,
+  '90e6a5e3-55a5-4094-a2a8-0d1cac09fb0e': pinterest,
 }
 const render_occurence = (content, skill) => {
   const splitted_content = content.toLowerCase().split(skill)
@@ -197,7 +199,10 @@ export function Testimonials() {
                         <div className="overflow-hidden rounded-full bg-slate-50">
                           <Image
                             className="h-14 w-14 object-cover"
-                            src={logo_mapper[testimonial.company_id]}
+                            src={logo_mapper.get(
+                              testimonial.company_id,
+                              avatarImage4
+                            )}
                             alt=""
                             width={56}
                             height={56}
