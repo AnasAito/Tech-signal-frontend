@@ -12,7 +12,7 @@ import netflix from '@/images/logos/netflix.png'
 import pinterest from '@/images/logos/pinterest.png'
 
 const logo_mapper = {
-  '9402e160-3516-4ff5-b8c2-5f54e315cdab': twitter,
+  '06b9d7b4-9769-491e-8646-53643ae097d6': twitter,
   'b7219959-a38f-40dd-bb3d-307924519fef': dropbox,
   '275a86e7-79ae-4d42-a2ff-2bdeeba248ea': netflix,
   '90e6a5e3-55a5-4094-a2a8-0d1cac09fb0e': pinterest,
@@ -45,7 +45,7 @@ export function Testimonials() {
     data: articles,
     error,
   } = useQuery(Queries['article.get.many'], {
-    variables: { order_by: { created_at: 'asc' } },
+    variables: { order_by: { created_at: 'desc' } },
   })
   const articles_formated = get(articles, 'Article', []).map((n) => {
     return {
@@ -89,14 +89,15 @@ export function Testimonials() {
         )
         let occ_text = article_occurences[occ_idx]['text']
         for (let skill_idx in skills) {
-          cards.push({
+          let data = {
             article_id: article_id,
             article_title: article_title,
             article_date: article_date,
             skill: skills[skill_idx],
             occurence_text: occ_text,
             company_id: company_id,
-          })
+          }
+          cards.push(data)
         }
       }
     }
@@ -113,7 +114,7 @@ export function Testimonials() {
     // return new_cards.splice(0, 3)
   }
 
-  console.log('articles', articles_formated, error)
+  console.log('articles', prepare_cards(articles_formated), error)
   return (
     <section
       id="testimonials"
@@ -159,62 +160,69 @@ export function Testimonials() {
           role="list"
           className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-left sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
         >
-          {prepare_cards(articles_formated).map((column, columnIndex) => (
-            <li key={columnIndex}>
-              <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
-                {column.map((testimonial, testimonialIndex) => (
-                  <a
-                    key={testimonialIndex}
-                    href={testimonial.article_id}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="transform cursor-pointer  transition duration-500 ease-in-out hover:scale-105"
-                  >
-                    <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                      <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
-                      <blockquote className="relative">
-                        <p className="mb-6 text-xl font-semibold text-gray-900">
-                          {testimonial.article_title}
-                        </p>
-                        <p className="text-lg tracking-tight text-slate-900">
-                          ...{' '}
-                          {render_occurence(
-                            testimonial.occurence_text,
-                            testimonial.skill
-                          )}{' '}
-                          ...
-                        </p>
-                      </blockquote>
-                      <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
-                        <div>
-                          <div className="font-display text-base text-slate-900">
-                            {'Company name'}
-                          </div>
-                          <div className="mt-1 text-sm text-slate-500">
-                            {testimonial.article_date == ''
-                              ? '2022'
-                              : testimonial.article_date}
-                          </div>
-                        </div>
-                        <div className="overflow-hidden rounded-full bg-slate-50">
-                          <Image
-                            className="h-14 w-14 object-cover"
-                            src={logo_mapper.get(
-                              testimonial.company_id,
-                              avatarImage4
-                            )}
-                            alt=""
-                            width={56}
-                            height={56}
-                          />
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </a>
-                ))}
-              </ul>
-            </li>
-          ))}
+          {loading_node ? (
+            <>loading ...</>
+          ) : (
+            prepare_cards(articles_formated).map((column, columnIndex) => (
+              <li key={columnIndex}>
+                <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
+                  {column
+                    .filter((a) => get(a, 'article_id', 'no_link') != 'no_link')
+                    .map((testimonial, testimonialIndex) => (
+                      <a
+                        key={testimonialIndex}
+                        href={testimonial.article_id}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="transform cursor-pointer  transition duration-500 ease-in-out hover:scale-105"
+                      >
+                        <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                          <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
+                          <blockquote className="relative">
+                            <p className="mb-6 text-xl font-semibold text-gray-900">
+                              {testimonial.article_title}
+                            </p>
+                            <p className="text-lg tracking-tight text-slate-900">
+                              ...{' '}
+                              {render_occurence(
+                                testimonial.occurence_text,
+                                testimonial.skill
+                              )}{' '}
+                              ...
+                            </p>
+                          </blockquote>
+                          <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
+                            <div>
+                              <div className="font-display text-base text-slate-900">
+                                {'Company name'}
+                              </div>
+                              <div className="mt-1 text-sm text-slate-500">
+                                {testimonial.article_date == ''
+                                  ? '2022'
+                                  : testimonial.article_date}
+                              </div>
+                            </div>
+                            <div className="overflow-hidden rounded-full bg-slate-50">
+                              <Image
+                                className="h-14 w-14 object-cover"
+                                src={get(
+                                  logo_mapper,
+                                  testimonial.company_id,
+                                  avatarImage4
+                                )}
+                                alt=""
+                                width={56}
+                                height={56}
+                              />
+                            </div>
+                          </figcaption>
+                        </figure>
+                      </a>
+                    ))}
+                </ul>
+              </li>
+            ))
+          )}
         </ul>
       </Container>
     </section>

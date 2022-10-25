@@ -17,7 +17,7 @@ export const ARTICLE_GET_MANY = gql`
       company_id
       published_at
       id
-      Occurences {
+      Occurences(limit: 2) {
         text
         ParsedSkills {
           skill_id
