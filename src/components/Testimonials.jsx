@@ -7,9 +7,11 @@ import { Container } from '@/components/Container'
 import avatarImage4 from '@/images/avatars/avatar-4.png'
 import spotify from '@/images/logos/spotify.png'
 import twitter from '@/images/logos/twitter.png'
+import dropbox from '@/images/logos/dropbox.png'
 
 const logo_mapper = {
   '9402e160-3516-4ff5-b8c2-5f54e315cdab': twitter,
+  'b7219959-a38f-40dd-bb3d-307924519fef': dropbox,
 }
 const render_occurence = (content, skill) => {
   const splitted_content = content.toLowerCase().split(skill)
