@@ -161,6 +161,7 @@ export function Testimonials() {
                     key={testimonialIndex}
                     href={testimonial.article_id}
                     target="_blank"
+                    rel="noreferrer"
                     className="transform cursor-pointer  transition duration-500 ease-in-out hover:scale-105"
                   >
                     <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
