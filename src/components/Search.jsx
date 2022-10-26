@@ -46,7 +46,7 @@ console.log('skill',skillId)
   console.log(filteredItems,error)
   return (
     <>
-    <p className='text-xl'>Scroll down or <button className='font-bold underline decoration-blue-40  ' onClick={()=>setOpen(true)}>Search for specific skills!</button></p>
+    <p className='text-xl'>Scroll down or <button className='font-bold underline decoration-blue-40  ' onClick={()=>setOpen(true)}>Click to search for specific skills!</button></p>
     <Transition.Root show={open} as={Fragment} afterLeave={() => setQuery('')} appear>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
         <Transition.Child
