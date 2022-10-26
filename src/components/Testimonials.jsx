@@ -2,6 +2,7 @@ import {useState} from 'react'
 import Image from 'next/future/image'
 import { useQuery } from '@apollo/client'
 import { get } from 'lodash'
+import GridLoader  from "react-spinners/ClipLoader";
 import Queries from '../api/queries/index'
 import { Container } from '@/components/Container'
 import {Search} from '@/components/Search'
@@ -196,14 +197,14 @@ export function Testimonials() {
         {<div className="mt-10 flex justify-center gap-x-6">
       <Search setSkillId= {setSkillId} skillId = {skillId} />
   </div>}
-
+ { loading_node ? (
+            <div className='flex justify-center items-center mt-24 ' ><GridLoader /></div>
+          ) : 
         <ul
           role="list"
           className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-left sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
         >
-          {loading_node ? (
-            <>loading ...</>
-          ) : (
+          {
             cards_to_render.map((column, columnIndex) => (
               <li key={columnIndex}>
                 <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
@@ -265,10 +266,12 @@ export function Testimonials() {
                       </a>
                     ))}
                 </ul>
+           
               </li>
             ))
-          )}
+          }
         </ul>
+           }
       </Container>
     </section>
   )
