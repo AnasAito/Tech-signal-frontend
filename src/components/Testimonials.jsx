@@ -1,9 +1,10 @@
+import {useState} from 'react'
 import Image from 'next/future/image'
 import { useQuery } from '@apollo/client'
 import { get } from 'lodash'
 import Queries from '../api/queries/index'
 import { Container } from '@/components/Container'
-
+import {Search} from '@/components/Search'
 import avatarImage4 from '@/images/avatars/avatar-4.png'
 import spotify from '@/images/logos/spotify.png'
 import twitter from '@/images/logos/twitter.png'
@@ -31,6 +32,86 @@ const render_occurence = (content, skill) => {
   )
 }
 
+const shuffle = (array) => {
+  let currentIndex = array.length,
+    randomIndex
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+
+    // And swap it with the current element.
+    ;[array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ]
+  }
+
+  return array
+}
+const prepare_cards = (articles) => {
+  let cards = []
+  for (let article_idx in articles) {
+    let article_title = articles[article_idx]['title']
+    let article_id = articles[article_idx]['id']
+    let article_date = articles[article_idx]['published_at']
+    let company_id = articles[article_idx]['company_id']
+    let article_occurences = articles[article_idx]['occurence']
+    for (let occ_idx in article_occurences) {
+      let skills = article_occurences[occ_idx]['ParsedSkills'].map(
+        (skill) => skill['skill_mention']
+      )
+      let occ_text = article_occurences[occ_idx]['text']
+      for (let skill_idx in skills) {
+        let data = {
+          article_id: article_id,
+          article_title: article_title,
+          article_date: article_date,
+          skill: skills[skill_idx],
+          occurence_text: occ_text,
+          company_id: company_id,
+        }
+        cards.push(data)
+      }
+    }
+  }
+
+  const new_cards = []
+  while (cards.length) new_cards.push(shuffle(cards).splice(0, 3))
+
+  try {
+    return new_cards[0].map((_, colIndex) =>
+      new_cards.map((row) => row[colIndex])
+    )
+  } catch (e) {
+    return []
+  }
+  // return new_cards.splice(0, 3)
+}
+const prepare_carsds_from_occs = (data) => 
+ {const cards = data.map(occ=>{return {
+  article_id: occ.Article.id,
+  article_title: occ.Article.title,
+  article_date: occ.Article.published_at,
+  skill: occ.ParsedSkills[0].skill_mention,
+  occurence_text: occ.text,
+  company_id: occ.Article.company_id,
+}})
+const new_cards = []
+while (cards.length) new_cards.push(shuffle(cards).splice(0, 3))
+
+try {
+  return new_cards[0].map((_, colIndex) =>
+    new_cards.map((row) => row[colIndex])
+  )
+} catch (e) {
+  return []
+}
+
+}
+
 function QuoteIcon(props) {
   return (
     <svg aria-hidden="true" width={105} height={78} {...props}>
@@ -40,13 +121,37 @@ function QuoteIcon(props) {
 }
 
 export function Testimonials() {
+
+  const [skillId,setSkillId] = useState('')
+ // GET ARTICLES
   const {
     loading: loading_node,
     data: articles,
     error,
   } = useQuery(Queries['article.get.many'], {
     variables: { order_by: { created_at: 'desc' } },
+    skip : skillId!=''
   })
+  // GET OCC FROM SKILL 
+  const {
+    loading: loading_occ,
+    data: parsedSkillsBySkill,
+    errorPar,
+  } = useQuery(Queries['parsedSkill.get.many'], {
+    variables: { where: { skill_id: {'_eq':skillId} } },
+    skip : skillId==''
+  })
+  const parsedSkillsBySkillFormated = get(parsedSkillsBySkill, 'ParsedSkill', []).map((n) =>  n.occurence_id)
+  // Get OCC meta data 
+  const {
+    loading: loading_occ_meta,
+    data: OccurencesByIds,
+    errorOcc,
+  } = useQuery(Queries['occ.get.many'], {
+    variables: { where: { id: {'_in':parsedSkillsBySkillFormated} } },
+    skip : parsedSkillsBySkillFormated.length == 0
+  })
+  const OccMetaFormated = get(OccurencesByIds,'Occurence',[])
   const articles_formated = get(articles, 'Article', []).map((n) => {
     return {
       id: n.id,
@@ -56,65 +161,12 @@ export function Testimonials() {
       occurence: n.Occurences,
     }
   })
-  const shuffle = (array) => {
-    let currentIndex = array.length,
-      randomIndex
 
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-
-      // And swap it with the current element.
-      ;[array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ]
-    }
-
-    return array
-  }
-  const prepare_cards = (articles) => {
-    let cards = []
-    for (let article_idx in articles) {
-      let article_title = articles[article_idx]['title']
-      let article_id = articles[article_idx]['id']
-      let article_date = articles[article_idx]['published_at']
-      let company_id = articles[article_idx]['company_id']
-      let article_occurences = articles[article_idx]['occurence']
-      for (let occ_idx in article_occurences) {
-        let skills = article_occurences[occ_idx]['ParsedSkills'].map(
-          (skill) => skill['skill_mention']
-        )
-        let occ_text = article_occurences[occ_idx]['text']
-        for (let skill_idx in skills) {
-          let data = {
-            article_id: article_id,
-            article_title: article_title,
-            article_date: article_date,
-            skill: skills[skill_idx],
-            occurence_text: occ_text,
-            company_id: company_id,
-          }
-          cards.push(data)
-        }
-      }
-    }
-    const new_cards = []
-    while (cards.length) new_cards.push(shuffle(cards).splice(0, 3))
-
-    try {
-      return new_cards[0].map((_, colIndex) =>
-        new_cards.map((row) => row[colIndex])
-      )
-    } catch (e) {
-      return []
-    }
-    // return new_cards.splice(0, 3)
-  }
-
-  console.log('articles', prepare_cards(articles_formated), error)
+ 
+  // console.log('articles', prepare_cards(articles_formated), error)
+  // console.log('occ by skill', parsedSkillsBySkillFormated,errorPar)
+  // console.log('occ by ids', prepare_carsds_from_occs(OccMetaFormated),errorOcc)
+  let cards_to_render = prepare_cards(articles_formated).length==0?prepare_carsds_from_occs(OccMetaFormated):prepare_cards(articles_formated)
   return (
     <section
       id="testimonials"
@@ -141,21 +193,10 @@ export function Testimonials() {
           so you can find quickly relevant and real-life content that suit your
           needs (skills, tools, new tech...)
         </p>
-        {/**<div className="mt-10 flex justify-center gap-x-6">
-          <Button href="/register">Get 6 months free</Button>
-          <Button
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-            variant="outline"
-          >
-            <svg
-              aria-hidden="true"
-              className="h-3 w-3 flex-none fill-blue-600 group-active:fill-current"
-            >
-              <path d="m9.997 6.91-7.583 3.447A1 1 0 0 1 1 9.447V2.553a1 1 0 0 1 1.414-.91L9.997 5.09c.782.355.782 1.465 0 1.82Z" />
-            </svg>
-            <span className="ml-3">Watch video</span>
-          </Button>
-  </div>**/}
+        {<div className="mt-10 flex justify-center gap-x-6">
+      <Search setSkillId= {setSkillId} skillId = {skillId} />
+  </div>}
+
         <ul
           role="list"
           className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-left sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
@@ -163,7 +204,7 @@ export function Testimonials() {
           {loading_node ? (
             <>loading ...</>
           ) : (
-            prepare_cards(articles_formated).map((column, columnIndex) => (
+            cards_to_render.map((column, columnIndex) => (
               <li key={columnIndex}>
                 <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
                   {column
