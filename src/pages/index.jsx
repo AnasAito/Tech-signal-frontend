@@ -26,8 +26,8 @@ export default function Home() {
     'LaddHnRyCgECD2Y3hd2zVpTxlZPuvBic0S2ucvnd1YQX0ynOLHyyjpxAT13HhGvN'
   )
   return (
-    <ApolloProvider client={client}>
-      <>
+    <div className="flex min-h-screen flex-col ">
+      <ApolloProvider client={client}>
         <Head>
           <title>TechSignal - find what to read fast</title>
           <meta
@@ -40,7 +40,7 @@ export default function Home() {
           <Testimonials />
         </main>
         <Footer />
-      </>
-    </ApolloProvider>
+      </ApolloProvider>
+    </div>
   )
 }
