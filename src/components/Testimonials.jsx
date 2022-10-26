@@ -1,23 +1,46 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import Image from 'next/future/image'
 import { useQuery } from '@apollo/client'
 import { get } from 'lodash'
-import GridLoader  from "react-spinners/ClipLoader";
+import GridLoader from 'react-spinners/ClipLoader'
 import Queries from '../api/queries/index'
 import { Container } from '@/components/Container'
-import {Search} from '@/components/Search'
+import { Search } from '@/components/Search'
 import avatarImage4 from '@/images/avatars/avatar-4.png'
 import spotify from '@/images/logos/spotify.png'
 import twitter from '@/images/logos/twitter.png'
 import dropbox from '@/images/logos/dropbox.png'
 import netflix from '@/images/logos/netflix.png'
 import pinterest from '@/images/logos/pinterest.png'
+import facebook from '@/images/logos/facebook.png'
+import cloudera from '@/images/logos/cloudera.png'
+import square from '@/images/logos/square.png'
+import uber from '@/images/logos/square.png'
+import medium from '@/images/logos/medium.png'
+import airbnb from '@/images/logos/airbnb.png'
+import github from '@/images/logos/github.png'
+import instacart from '@/images/logos/instacart.png'
 
 const logo_mapper = {
-  '06b9d7b4-9769-491e-8646-53643ae097d6': {'logo' : twitter , 'name': 'Twitter'},
-  'b7219959-a38f-40dd-bb3d-307924519fef': {'logo' : dropbox , 'name': 'DropBox'},
-  '275a86e7-79ae-4d42-a2ff-2bdeeba248ea':  {'logo' : netflix , 'name': 'Netflix'},
-  '90e6a5e3-55a5-4094-a2a8-0d1cac09fb0e':  {'logo' : pinterest , 'name': 'Pinterest'},
+  '06b9d7b4-9769-491e-8646-53643ae097d6': { logo: twitter, name: 'Twitter' },
+  'd9e75b60-fb20-441d-83f6-eccb61f34440': { logo: dropbox, name: 'DropBox' },
+  '275a86e7-79ae-4d42-a2ff-2bdeeba248ea': { logo: netflix, name: 'Netflix' },
+  '90e6a5e3-55a5-4094-a2a8-0d1cac09fb0e': {
+    logo: pinterest,
+    name: 'Pinterest',
+  },
+  '408fb396-82c6-4a2d-99a7-24973c588b87': { logo: cloudera, name: 'Cloudera' },
+  '81eb3402-7195-473b-96e5-040630e8b258': { logo: uber, name: 'Uber' },
+  '54718432-22c7-40b2-9106-42eb7e5b9ffb': { logo: facebook, name: 'Facebook' },
+  '44c79fa2-7e0f-4519-a61c-e08137667a64': { logo: square, name: 'Square' },
+  '07a5ffde-e41d-45c1-baaa-e953ee3c97b7': { logo: medium, name: 'Medium' },
+  'c920693a-65b1-4aea-a103-bfb0b961ff2b': { logo: airbnb, name: 'Airbnb' },
+  'dbdcb2a7-df13-4f0a-af2f-24eba4ec95db': { logo: github, name: 'Github' },
+  '3dc5dd08-eda1-456b-b000-0e7febc9ee0b': { logo: spotify, name: 'Spotify' },
+  '48059e00-f4e5-484f-a239-148a7ab2d73b': {
+    logo: instacart,
+    name: 'Instacart',
+  },
 }
 const render_occurence = (content, skill) => {
   const splitted_content = content.toLowerCase().split(skill)
@@ -91,26 +114,28 @@ const prepare_cards = (articles) => {
   }
   // return new_cards.splice(0, 3)
 }
-const prepare_carsds_from_occs = (data) => 
- {const cards = data.map(occ=>{return {
-  article_id: occ.Article.id,
-  article_title: occ.Article.title,
-  article_date: occ.Article.published_at,
-  skill: occ.ParsedSkills[0].skill_mention,
-  occurence_text: occ.text,
-  company_id: occ.Article.company_id,
-}})
-const new_cards = []
-while (cards.length) new_cards.push(shuffle(cards).splice(0, 3))
+const prepare_carsds_from_occs = (data, skill_id) => {
+  const cards = data.map((occ) => {
+    return {
+      article_id: occ.Article.id,
+      article_title: occ.Article.title,
+      article_date: occ.Article.published_at,
+      skill: occ.ParsedSkills.filter((s) => s['skill_id'] == skill_id)[0]
+        .skill_mention,
+      occurence_text: occ.text,
+      company_id: occ.Article.company_id,
+    }
+  })
+  const new_cards = []
+  while (cards.length) new_cards.push(shuffle(cards).splice(0, 3))
 
-try {
-  return new_cards[0].map((_, colIndex) =>
-    new_cards.map((row) => row[colIndex])
-  )
-} catch (e) {
-  return []
-}
-
+  try {
+    return new_cards[0].map((_, colIndex) =>
+      new_cards.map((row) => row[colIndex])
+    )
+  } catch (e) {
+    return []
+  }
 }
 
 function QuoteIcon(props) {
@@ -122,37 +147,40 @@ function QuoteIcon(props) {
 }
 
 export function Testimonials() {
-
-  const [skillId,setSkillId] = useState('')
- // GET ARTICLES
+  const [skillId, setSkillId] = useState('')
+  // GET ARTICLES
   const {
     loading: loading_node,
     data: articles,
     error,
   } = useQuery(Queries['article.get.many'], {
-    variables: { order_by: { created_at: 'desc' } },
-    skip : skillId!=''
+    variables: { limit: 10, order_by: { created_at: 'desc' } },
+    skip: skillId != '',
   })
-  // GET OCC FROM SKILL 
+  // GET OCC FROM SKILL
   const {
     loading: loading_occ,
     data: parsedSkillsBySkill,
     errorPar,
   } = useQuery(Queries['parsedSkill.get.many'], {
-    variables: { where: { skill_id: {'_eq':skillId} } },
-    skip : skillId==''
+    variables: { where: { skill_id: { _eq: skillId } } },
+    skip: skillId == '',
   })
-  const parsedSkillsBySkillFormated = get(parsedSkillsBySkill, 'ParsedSkill', []).map((n) =>  n.occurence_id)
-  // Get OCC meta data 
+  const parsedSkillsBySkillFormated = get(
+    parsedSkillsBySkill,
+    'ParsedSkill',
+    []
+  ).map((n) => n.occurence_id)
+  // Get OCC meta data
   const {
     loading: loading_occ_meta,
     data: OccurencesByIds,
     errorOcc,
   } = useQuery(Queries['occ.get.many'], {
-    variables: { where: { id: {'_in':parsedSkillsBySkillFormated} } },
-    skip : parsedSkillsBySkillFormated.length == 0
+    variables: { where: { id: { _in: parsedSkillsBySkillFormated } } },
+    skip: parsedSkillsBySkillFormated.length == 0,
   })
-  const OccMetaFormated = get(OccurencesByIds,'Occurence',[])
+  const OccMetaFormated = get(OccurencesByIds, 'Occurence', [])
   const articles_formated = get(articles, 'Article', []).map((n) => {
     return {
       id: n.id,
@@ -163,11 +191,13 @@ export function Testimonials() {
     }
   })
 
- 
   // console.log('articles', prepare_cards(articles_formated), error)
   // console.log('occ by skill', parsedSkillsBySkillFormated,errorPar)
   // console.log('occ by ids', prepare_carsds_from_occs(OccMetaFormated),errorOcc)
-  let cards_to_render = prepare_cards(articles_formated).length==0?prepare_carsds_from_occs(OccMetaFormated):prepare_cards(articles_formated)
+  let cards_to_render =
+    prepare_cards(articles_formated).length == 0
+      ? prepare_carsds_from_occs(OccMetaFormated, skillId)
+      : prepare_cards(articles_formated)
   return (
     <section
       id="testimonials"
@@ -190,20 +220,25 @@ export function Testimonials() {
           </span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-        We process and index thousands of articles from companies' tech blogs so you can find quickly relevant and real-life content that suits your needs (skills, tools, new tech...)
+          We process and index thousands of articles from companies' tech blogs
+          so you can find quickly relevant and real-life content that suits your
+          needs (skills, tools, new tech...)
         </p>
-        {<div className="mt-10 flex justify-center gap-x-6">
-      <Search setSkillId= {setSkillId} skillId = {skillId} />
-  </div>}
- { loading_node ? (
-            <div className='flex justify-center items-center mt-24 ' ><GridLoader /></div>
-          ) : 
-        <ul
-          role="list"
-          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-left sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
-        >
-          {
-            cards_to_render.map((column, columnIndex) => (
+        {
+          <div className="mt-10 flex justify-center gap-x-6">
+            <Search setSkillId={setSkillId} skillId={skillId} />
+          </div>
+        }
+        {loading_node ? (
+          <div className="mt-24 flex items-center justify-center ">
+            <GridLoader />
+          </div>
+        ) : (
+          <ul
+            role="list"
+            className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-left sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
+          >
+            {cards_to_render.map((column, columnIndex) => (
               <li key={columnIndex}>
                 <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
                   {column
@@ -234,11 +269,12 @@ export function Testimonials() {
                           <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                             <div>
                               <div className="font-display text-base text-slate-900">
-                                {get(
-                                  logo_mapper,
-                                  testimonial.company_id,
-                                   {'logo' :avatarImage4 , 'name' : '' }
-                                ).name}
+                                {
+                                  get(logo_mapper, testimonial.company_id, {
+                                    logo: avatarImage4,
+                                    name: '',
+                                  }).name
+                                }
                               </div>
                               <div className="mt-1 text-sm text-slate-500">
                                 {testimonial.article_date == ''
@@ -249,11 +285,12 @@ export function Testimonials() {
                             <div className="overflow-hidden rounded-full bg-slate-50">
                               <Image
                                 className="h-14 w-14 object-cover"
-                                src={get(
-                                  logo_mapper,
-                                  testimonial.company_id,
-                                   {'logo' :avatarImage4 , 'name' : '' }
-                                ).logo}
+                                src={
+                                  get(logo_mapper, testimonial.company_id, {
+                                    logo: avatarImage4,
+                                    name: '',
+                                  }).logo
+                                }
                                 alt=""
                                 width={56}
                                 height={56}
@@ -264,12 +301,10 @@ export function Testimonials() {
                       </a>
                     ))}
                 </ul>
-           
               </li>
-            ))
-          }
-        </ul>
-           }
+            ))}
+          </ul>
+        )}
       </Container>
     </section>
   )
