@@ -12,10 +12,10 @@ import netflix from '@/images/logos/netflix.png'
 import pinterest from '@/images/logos/pinterest.png'
 
 const logo_mapper = {
-  '06b9d7b4-9769-491e-8646-53643ae097d6': twitter,
-  'b7219959-a38f-40dd-bb3d-307924519fef': dropbox,
-  '275a86e7-79ae-4d42-a2ff-2bdeeba248ea': netflix,
-  '90e6a5e3-55a5-4094-a2a8-0d1cac09fb0e': pinterest,
+  '06b9d7b4-9769-491e-8646-53643ae097d6': {'logo' : twitter , 'name': 'Twitter'},
+  'b7219959-a38f-40dd-bb3d-307924519fef': {'logo' : dropbox , 'name': 'DropBox'},
+  '275a86e7-79ae-4d42-a2ff-2bdeeba248ea':  {'logo' : netflix , 'name': 'Netflix'},
+  '90e6a5e3-55a5-4094-a2a8-0d1cac09fb0e':  {'logo' : pinterest , 'name': 'Pinterest'},
 }
 const render_occurence = (content, skill) => {
   const splitted_content = content.toLowerCase().split(skill)
@@ -194,7 +194,11 @@ export function Testimonials() {
                           <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                             <div>
                               <div className="font-display text-base text-slate-900">
-                                {'Company name'}
+                                {get(
+                                  logo_mapper,
+                                  testimonial.company_id,
+                                   {'logo' :avatarImage4 , 'name' : '' }
+                                ).name}
                               </div>
                               <div className="mt-1 text-sm text-slate-500">
                                 {testimonial.article_date == ''
@@ -208,8 +212,8 @@ export function Testimonials() {
                                 src={get(
                                   logo_mapper,
                                   testimonial.company_id,
-                                  avatarImage4
-                                )}
+                                   {'logo' :avatarImage4 , 'name' : '' }
+                                ).logo}
                                 alt=""
                                 width={56}
                                 height={56}
