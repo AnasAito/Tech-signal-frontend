@@ -205,7 +205,10 @@ export function Testimonials() {
       className="bg-slate-50  font-mono"
     >
       <Container className="pt-5 pb-16 text-center lg:pt-10">
-        <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
+        <h1
+          onClick={() => setSkillId('')}
+          className=" mx-auto max-w-4xl cursor-pointer font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl"
+        >
           Tech{' '}
           <span className="relative whitespace-nowrap text-yellow-600">
             <svg
