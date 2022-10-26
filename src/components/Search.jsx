@@ -6,7 +6,7 @@ import { Combobox, Dialog, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import ClipLoader from "react-spinners/ClipLoader";
 import {
-CommandLineIcon, BriefcaseIcon
+CommandLineIcon, BriefcaseIcon,ExclamationCircleIcon
 } from '@heroicons/react/24/outline'
 
 
