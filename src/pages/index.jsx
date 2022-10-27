@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
 import { Testimonials } from '@/components/Testimonials'
+import { TrendChart } from '@/components/TrendChart'
 import {
   ApolloClient,
   ApolloProvider,
