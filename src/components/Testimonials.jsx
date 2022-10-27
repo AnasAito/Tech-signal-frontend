@@ -199,10 +199,10 @@ export function Testimonials() {
           so you can find quickly relevant and real-life content that suits your
           needs (skills, tools, new tech...)
         </p>
-        <p className="text-xl"> Trendy Tech terms</p>
+
         <ul
           role="list"
-          className=" my-4 flex flex-row items-center justify-center  gap-20 text-left "
+          className="  my-4 flex flex-col items-center justify-center gap-20  text-left lg:flex-row "
         >
           {staticTrends.map((skill) => (
             <div key={skill['id']}>
