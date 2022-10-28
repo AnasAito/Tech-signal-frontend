@@ -8,9 +8,9 @@ import { Container } from '@/components/Container'
 import { Search } from '@/components/Search'
 import { TrendChart } from '@/components/TrendChart'
 import avatarImage4 from '@/images/avatars/avatar-4.png'
-
-import withoutHydration from 'react-without-hydration'
-const TrendChartH = withoutHydration()(TrendChart)
+import {Banner} from  '@/components/Banner'
+// import withoutHydration from 'react-without-hydration'
+// const TrendChartH = withoutHydration()(TrendChart)
 
 const staticTrends = Queries['ts.get.many']
 const logo_mapper = Queries['logo.get.many']
@@ -176,6 +176,7 @@ export function Testimonials() {
       aria-label="What our customers are saying"
       className="bg-slate-50  font-mono"
     >
+      <Banner/>
       <Container className="pt-5 pb-16 text-center lg:pt-10">
         <h1
           onClick={() => setSkillId('')}
