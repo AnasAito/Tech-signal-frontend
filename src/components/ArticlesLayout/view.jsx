@@ -17,8 +17,8 @@ export function View({
   const [show, setShow] = useState(true)
   return (
     <section
-      id="testimonials"
-      aria-label="What our customers are saying"
+      // id="testimonials"
+      // aria-label="What our customers are saying"
       className="bg-slate-50  font-mono"
     >
       <Banner show={show} setShow={setShow} />
