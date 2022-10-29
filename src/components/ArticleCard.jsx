@@ -24,7 +24,7 @@ const render_occurence = (content, skill) => {
     </>
   )
 }
-export function ArticleCard({ article }) {
+export function ArticleCard({ article, key }) {
   const defaultCompany = {
     logo: empty,
     name: '',
@@ -32,7 +32,7 @@ export function ArticleCard({ article }) {
   return (
     <>
       <a
-        key={article.article_id}
+        key={key}
         href={article.article_id}
         target="_blank"
         rel="noreferrer"

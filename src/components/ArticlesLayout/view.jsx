@@ -94,7 +94,7 @@ export function View({
                         get(article, 'article_id', 'no_link') != 'no_link'
                     )
                     .map((article, articleIndex) => (
-                      <ArticleCard article={article} />
+                      <ArticleCard article={article} key={articleIndex} />
                     ))}
                 </ul>
               </li>
