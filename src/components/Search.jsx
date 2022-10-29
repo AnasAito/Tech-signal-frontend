@@ -65,10 +65,10 @@ export function Search({ setSkillId, skillId }) {
         >
           Click to search for specific skills (
           {
-            <kbd class="font-sans font-semibold dark:text-slate-500">
+            <kbd className="font-sans font-semibold dark:text-slate-500">
               <abbr
                 title="Command"
-                class="text-slate-300 no-underline dark:text-slate-500"
+                className="text-slate-300 no-underline dark:text-slate-500"
               >
                 ⌘
               </abbr>{' '}
