@@ -19,6 +19,9 @@ import cloudflare from '@/images/logos/cloudflare.png'
 import cockroach from '@/images/logos/cockroach.png'
 import confluent from '@/images/logos/confluent.png'
 import capgemini from '@/images/logos/capgemini.jpeg'
+import heroku from '@/images/logos/heroku.png'
+import expedia from '@/images/logos/expedia.jpeg'
+import googleSearch from '@/images/logos/googleSearch.jpeg'
 export const logo_mapper = {
   '06b9d7b4-9769-491e-8646-53643ae097d6': { logo: twitter, name: 'Twitter' },
   'd9e75b60-fb20-441d-83f6-eccb61f34440': { logo: dropbox, name: 'DropBox' },
@@ -61,6 +64,22 @@ export const logo_mapper = {
   'ed8548ce-6edf-42c2-8caf-0441d384917e': {
     logo: capgemini,
     name: 'Capgemini',
+  },
+  '79f5c27a-b9b1-47f6-9d63-29c5228931c8': {
+    logo: heroku,
+    name: 'Heroku',
+  },
+  '674f8dd1-70a4-4373-80c6-bd5f14bd3610': {
+    logo: googleSearch,
+    name: 'Google Research',
+  },
+  'fa03bc2c-dc96-43f6-8721-f34a731e1358': {
+    logo: expedia,
+    name: 'Expedia',
+  },
+  '0c25b55f-55da-484f-b18e-22b7cbfe8718': {
+    logo: facebook,
+    name: 'Meta AI Research',
   },
 }
 
