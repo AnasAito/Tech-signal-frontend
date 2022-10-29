@@ -17,9 +17,10 @@ export function Banner({ show, setShow }) {
                 <p className="ml-3 truncate font-medium text-white">
                   {/* <span className="md:hidden">We announced a new product!</span>
               <span className="hidden md:inline">Big news! We're excited to announce a brand new product.</span> */}
-                  <span className="md:hidden">90 articles added!</span>
+                  <span className="md:hidden">New companies added!</span>
                   <span className="hidden md:inline">
-                    Update! We have added 90 articles.
+                    Update! We have added 5 new companies (Capgemini,
+                    CockroachDb, Etsy, Confluent and Ebay)
                   </span>
                 </p>
               </div>
