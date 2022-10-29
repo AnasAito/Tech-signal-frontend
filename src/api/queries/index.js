@@ -4,6 +4,7 @@ import parsedSkill from './parsedSkill'
 import occurence from './occurence'
 import ts from './ts'
 import logo from './logo'
+import stats from './stats'
 const Queries = {
   ...article,
   ...skill,
@@ -11,5 +12,6 @@ const Queries = {
   ...occurence,
   ...ts,
   ...logo,
+  ...stats,
 }
 export default Queries
