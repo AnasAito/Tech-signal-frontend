@@ -138,6 +138,7 @@ export function ArticlesLayout() {
       ? prepare_carsds_from_occs(OccMetaFormated, skillId)
       : prepare_cards(articles_formated)
   const staticTrends = Queries['ts.get.many']
+
   return (
     <>
       <View

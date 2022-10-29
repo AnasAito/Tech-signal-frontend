@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ArticleCard } from '../ArticleCard'
 import { ArticleCardSkeleton } from '../ArticleCardSkeleton'
 import { get } from 'lodash'
@@ -14,14 +14,14 @@ export function View({
   setSkillId,
   skillId,
 }) {
-  console.log('from view : ', cards_to_render)
+  const [show, setShow] = useState(true)
   return (
     <section
       id="testimonials"
       aria-label="What our customers are saying"
       className="bg-slate-50  font-mono"
     >
-      <Banner />
+      <Banner show={show} setShow={setShow} />
       <Container className="pt-5 pb-16 text-center lg:pt-10">
         <h1
           onClick={() => setSkillId('')}
