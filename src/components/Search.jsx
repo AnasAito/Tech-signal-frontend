@@ -116,7 +116,7 @@ export function Search({ setSkillId, skillId }) {
                     />
                     <Combobox.Input
                       className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
-                      placeholder="Try data engineering , sql , elasticsearch or any skill ..."
+                      placeholder="Try machine learning , sql , elasticsearch or any skill ..."
                       onChange={(event) => setQuery(event.target.value)}
                     />
                   </div>
