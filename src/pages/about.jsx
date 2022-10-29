@@ -14,7 +14,7 @@ export default function About() {
       <Header />
       <main className="flex flex-col items-center">
         <p className=" mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
-          About Me
+          About
         </p>
 
         <div className="mx-auto mt-3 max-w-md text-base text-gray-500 sm:text-lg md:mt-5 md:max-w-3xl md:text-xl">
@@ -27,20 +27,39 @@ export default function About() {
             to build apps that might impact a large number of people.
           </p>
           <p className=" mt-2">
-            Tech signal comes as a continuation to SkillNER a module that i
-            built a year ao with my friend @Badr_Moufad to extract skills from
-            job description using a large database of skills. This module is
-            used to annotate articles with tech skills and tools.
+            Tech signal comes as a continuation of{' '}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="font-bold underline"
+              href="https://github.com/AnasAito/SkillNER"
+            >
+              SKILLNER
+            </a>{' '}
+            a module that i built a year ao with my dear friend{' '}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="font-bold underline"
+              href="https://github.com/Badr-MOUFAD"
+            >
+              @Badr_Moufad
+            </a>{' '}
+            to extract skills from job description using a large database of
+            skills. This module is used to annotate articles with tech skills
+            and tools.
           </p>
           <p className=" mt-2">
             I usually choose Articles published by big tech companies to learn
-            how they use technology (that im familiar with or that i want to
-            learn about)to solve small or large real problems.
+            how they use technologies (that Im familiar with or that I want to
+            learn about)to solve small or large real problems in real life.This
+            keep me motivated (Why do i need to lean this tech?) and also gives
+            me ideas about real life use cases
           </p>
           <p className=" mt-2">
             This articles are scattered all over the web and you need time to
             find relevant ones . The goal of Tech signal is to gather and make
-            searchable. That it!
+            them searchable. That it!
           </p>
         </div>
       </main>
