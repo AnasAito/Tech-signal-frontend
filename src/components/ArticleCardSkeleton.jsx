@@ -6,15 +6,12 @@ function QuoteIcon(props) {
   )
 }
 
-export function ArticleCardSkeleton({ skKey }) {
+export function ArticleCardSkeleton() {
   const choices = [7, 8, 9, 10, 11, 15]
   let n = choices[Math.floor(Math.random() * choices.length)]
   const lines = Array(n).fill(0)
   return (
-    <div
-      key={skKey}
-      className="max-w-sm transform   animate-pulse cursor-pointer "
-    >
+    <div className="max-w-sm transform   animate-pulse cursor-pointer ">
       <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
         <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
 

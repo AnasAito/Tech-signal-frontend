@@ -76,7 +76,7 @@ export function View({
                 <li key={columnIndex}>
                   <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
                     {column.map((article, articleIndex) => (
-                      <ArticleCardSkeleton skKey={articleIndex} />
+                      <ArticleCardSkeleton key={articleIndex} />
                     ))}
                   </ul>
                 </li>
@@ -97,7 +97,7 @@ export function View({
                         get(article, 'article_id', 'no_link') != 'no_link'
                     )
                     .map((article, articleIndex) => (
-                      <ArticleCard article={article} key={articleIndex} />
+                      <ArticleCard key={articleIndex} article={article} />
                     ))}
                 </ul>
               </li>
