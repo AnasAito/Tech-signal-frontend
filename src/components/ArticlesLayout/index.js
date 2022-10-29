@@ -96,7 +96,11 @@ export function ArticlesLayout() {
     data: articles,
     error,
   } = useQuery(Queries['article.get.many'], {
-    variables: { limit: 10, order_by: { created_at: 'desc' } },
+    variables: {
+      limit: 10,
+      order_by: { published_at: 'desc' },
+      // where: { company_id: { _eq: '54718432-22c7-40b2-9106-42eb7e5b9ffb' } },//debug
+    },
     skip: skillId != '',
   })
   // GET OCC FROM SKILL

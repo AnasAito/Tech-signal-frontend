@@ -40,10 +40,13 @@ export function View({
             <span className="relative">Signal</span>
           </span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-          We process and index thousands of articles from companies' tech blogs
+        <p className="mx-auto mt-6 mb-10 max-w-4xl text-2xl  text-slate-700">
+          We annotate and index articles from{' '}
+          <span className="font-bold text-black">
+            companies' tech blogs with tech skills and tools
+          </span>{' '}
           so you can find quickly relevant and real-life content that suits your
-          needs (skills, tools, new tech...)
+          needs.
         </p>
 
         <ul
@@ -94,7 +97,7 @@ export function View({
                         get(article, 'article_id', 'no_link') != 'no_link'
                     )
                     .map((article, articleIndex) => (
-                      <ArticleCard article={article} key={articleIndex} />
+                      <ArticleCard key={articleIndex} article={article} />
                     ))}
                 </ul>
               </li>
