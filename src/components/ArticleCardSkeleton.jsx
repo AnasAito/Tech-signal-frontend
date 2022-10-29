@@ -1,8 +1,3 @@
-import Image from 'next/future/image'
-
-import { get } from 'lodash'
-import avatarImage4 from '@/images/avatars/avatar-4.png'
-
 function QuoteIcon(props) {
   return (
     <svg aria-hidden="true" width={105} height={78} {...props}>
@@ -12,13 +7,6 @@ function QuoteIcon(props) {
 }
 
 export function ArticleCardSkeleton({ key }) {
-  const defaultCompany = {
-    logo: avatarImage4,
-    name: '',
-  }
-  //   Array.prototype.random = function () {
-  //     return this[Math.floor(Math.random() * this.length)]
-  //   }
   const choices = [7, 8, 9, 10, 11, 15]
   let n = choices[Math.floor(Math.random() * choices.length)]
   const lines = Array(n).fill(0)
@@ -31,30 +19,30 @@ export function ArticleCardSkeleton({ key }) {
         <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
 
         <blockquote className="relative">
-          <div class=" mb-10 h-5 w-48 rounded-sm bg-gray-200 dark:bg-gray-500"></div>
+          <div className=" mb-10 h-5 w-48 rounded-sm bg-gray-200 dark:bg-gray-500"></div>
           {lines.map((l, idx) => (
             <div
               key={idx}
-              class="mb-2.5 h-2 w-72 rounded-full bg-gray-200 dark:bg-gray-500"
+              className="mb-2.5 h-2 w-72 rounded-full bg-gray-200 dark:bg-gray-500"
             ></div>
           ))}
         </blockquote>
         <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
           <div>
-            <div class="mb-2 h-2.5 w-32 rounded-full bg-gray-200 dark:bg-gray-500"></div>
-            <div class="h-2  w-20 rounded-full bg-gray-200 dark:bg-gray-500"></div>
+            <div className="mb-2 h-2.5 w-32 rounded-full bg-gray-200 dark:bg-gray-500"></div>
+            <div className="h-2  w-20 rounded-full bg-gray-200 dark:bg-gray-500"></div>
           </div>
           <svg
-            class="h-14 w-14 text-gray-200 dark:text-gray-500"
+            className="h-14 w-14 text-gray-200 dark:text-gray-500"
             aria-hidden="true"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </figcaption>
