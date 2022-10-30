@@ -22,6 +22,13 @@ import capgemini from '@/images/logos/capgemini.jpeg'
 import heroku from '@/images/logos/heroku.png'
 import expedia from '@/images/logos/expedia.jpeg'
 import googleSearch from '@/images/logos/googleSearch.jpeg'
+import instagram from '@/images/logos/instagram.png'
+import kickstarter from '@/images/logos/kickstarter.png'
+import nextdoor from '@/images/logos/nextdoor.png'
+import postman from '@/images/logos/postman.png'
+import salesforce from '@/images/logos/salesforce.png'
+import shopify from '@/images/logos/shopify.png'
+import adidas from '@/images/logos/adidas.png'
 export const logo_mapper = {
   '06b9d7b4-9769-491e-8646-53643ae097d6': { logo: twitter, name: 'Twitter' },
   'd9e75b60-fb20-441d-83f6-eccb61f34440': { logo: dropbox, name: 'DropBox' },
@@ -81,8 +88,36 @@ export const logo_mapper = {
     logo: facebook,
     name: 'Meta AI Research',
   },
+  '070d2d9a-b4fa-448c-bbe7-e82f3f9d7092': {
+    logo: shopify,
+    name: 'Shopify',
+  },
+  '416e4c56-1f6a-4f1a-9b07-c1f54c2a50cb': {
+    logo: salesforce,
+    name: 'SalesForce',
+  },
+  '36c66b89-d5d2-4537-9fbf-a4d675f2aac8': {
+    logo: adidas,
+    name: 'Runtastic',
+  },
+  '809bb176-fa61-4b98-8cb0-4b2eab7e7097': {
+    logo: postman,
+    name: 'Postman',
+  },
+  'c109e574-4ca3-49eb-8853-2c57031eeb12': {
+    logo: nextdoor,
+    name: 'Nextdoor',
+  },
+  'fc11d2e8-7dda-49f7-a374-ecd552bbb1a7': {
+    logo: kickstarter,
+    name: 'Kickstarter',
+  },
+  'd4d47726-2ddd-499d-a9b7-c42f1da4de6e': {
+    logo: instagram,
+    name: 'Instagram',
+  },
 }
-
+//
 export default {
   'logo.get.many': logo_mapper,
 }
