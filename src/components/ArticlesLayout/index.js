@@ -126,6 +126,17 @@ export function ArticlesLayout() {
     variables: { where: { id: { _in: parsedSkillsBySkillFormated } } },
     skip: parsedSkillsBySkillFormated.length == 0,
   })
+  // Get SKILL EMSI META
+  const {
+    loading: loading_emsi,
+    data: emsiSkill,
+    error: emsierror,
+  } = useQuery(Queries['skill.get.one'], {
+    variables: {
+      id: skillId,
+    },
+    skip: skillId == '',
+  })
   const OccMetaFormated = get(OccurencesByIds, 'Occurence', [])
   const articles_formated = get(articles, 'Article', []).map((n) => {
     return {
@@ -142,15 +153,19 @@ export function ArticlesLayout() {
       ? prepare_carsds_from_occs(OccMetaFormated, skillId)
       : prepare_cards(articles_formated)
   const staticTrends = Queries['ts.get.many']
-
+  let articleCount = OccMetaFormated.length
+  let SkillName = get(emsiSkill, 'Skill_by_pk.name', '')
+  console.log('skill meta from search', emsiSkill, emsierror)
   return (
     <>
       <View
         cards_to_render={cards_to_render}
         staticTrends={staticTrends}
-        loading_node={loading_node}
+        loading_node={loading_node || loading_occ_meta}
         setSkillId={setSkillId}
         skillId={skillId}
+        articleCount={articleCount}
+        SkillName={SkillName}
       />
       {/* <div>test</div> */}
     </>

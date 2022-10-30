@@ -63,7 +63,7 @@ export function Search({ setSkillId, skillId }) {
           className="decoration-blue-40 font-bold underline  "
           onClick={() => setOpen(true)}
         >
-          Click to search for specific skills (
+          search for specific skills (
           {
             <kbd className="font-sans font-semibold dark:text-slate-500">
               <abbr

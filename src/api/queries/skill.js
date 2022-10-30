@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const Skill_GET_MANY = gql`
   query skill(
@@ -9,16 +9,27 @@ export const Skill_GET_MANY = gql`
   ) {
     Skill(where: $where, order_by: $order_by, limit: $limit, offset: $offset) {
       id
-    name
-    category
-    subCategory
-    isSoftware
+      name
+      category
+      subCategory
+      isSoftware
     }
   }
-`;
+`
 
-
+export const Skill_GET_ONE = gql`
+  query skill($id: String!) {
+    Skill_by_pk(id: $id) {
+      id
+      name
+      category
+      subCategory
+      isSoftware
+    }
+  }
+`
 
 export default {
-  "skill.get.many": Skill_GET_MANY,
-};
+  'skill.get.many': Skill_GET_MANY,
+  'skill.get.one': Skill_GET_ONE,
+}

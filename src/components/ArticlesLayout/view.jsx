@@ -13,6 +13,8 @@ export function View({
   loading_node,
   setSkillId,
   skillId,
+  articleCount,
+  SkillName,
 }) {
   const [show, setShow] = useState(true)
   return (
@@ -62,8 +64,14 @@ export function View({
         <div className="mt-10 flex justify-center gap-x-6">
           <Search setSkillId={setSkillId} skillId={skillId} />
         </div>
+        {articleCount != 0 && (
+          <p className="mt-10 text-2xl ">
+            {articleCount} Articles found about{' '}
+            <span className="font-bold">{SkillName}</span>
+          </p>
+        )}
         {loading_node ? (
-          <div className="mt-24 flex items-center justify-center ">
+          <div className="mt-10 flex items-center justify-center ">
             <ul
               role="list"
               className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-left sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
