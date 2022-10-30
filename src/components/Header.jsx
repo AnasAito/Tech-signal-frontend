@@ -102,12 +102,17 @@ export function Header() {
             </div>
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
-            {/* <Button href="" color="yellow">
+            <Button
+              href="https://github.com/sponsors/AnasAito"
+              target="_blank"
+              rel="noreferrer"
+              color="yellow"
+            >
               <span>
-                Share
-                <span className="hidden lg:inline"> it!</span>
+                <span className="hidden lg:inline"> Keep the App running!</span>
+                <span className="inline lg:hidden"> Sponsor me!</span>
               </span>
-            </Button> */}
+            </Button>
 
             <div className="-mr-1 md:hidden">
               <MobileNavigation />
