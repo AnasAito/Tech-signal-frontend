@@ -66,8 +66,8 @@ export function View({
         </div>
         {articleCount != 0 && (
           <p className="mt-10 text-2xl ">
-            {articleCount} Articles found about{' '}
-            <span className="font-bold">{SkillName}</span>
+            {articleCount} {articleCount == 1 ? 'Article' : 'Articles'} found
+            about <span className="font-bold">{SkillName}</span>
           </p>
         )}
         {loading_node ? (
