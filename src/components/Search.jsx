@@ -44,6 +44,7 @@ export function Search({ setSkillId, skillId }) {
     if (e.keyCode === 75 && e.metaKey) {
       setOpen(!open)
     }
+  
   }, [])
 
   useEffect(() => {

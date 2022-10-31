@@ -28,7 +28,7 @@ export default function Home() {
   // )
   return (
     <div className="flex min-h-screen flex-col ">
-      <Head>
+      <Head>   
         <title>TechSignal - find what to read fast</title>
         <meta
           name="description"
