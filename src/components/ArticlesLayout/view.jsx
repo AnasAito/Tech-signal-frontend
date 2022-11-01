@@ -3,7 +3,9 @@ import { ArticleCard } from '../ArticleCard'
 import { ArticleCardSkeleton } from '../ArticleCardSkeleton'
 import { get } from 'lodash'
 import { Container } from '../Container'
-import { Search } from '../Search'
+// import { Search } from '../Search'
+import { Transition } from '@headlessui/react'
+import { SearchNew } from '../SearchNew'
 import { TrendChart } from '../TrendChart'
 import { Banner } from '../Banner'
 
@@ -21,7 +23,7 @@ export function View({
     <section
       // id="testimonials"
       // aria-label="What our customers are saying"
-      className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
+      className="  bg-slate-50 font-mono text-slate-900 dark:bg-slate-800 dark:text-white"
     >
       <Banner show={show} setShow={setShow} />
       <Container className="pt-5 pb-16 text-center lg:pt-10">
@@ -51,18 +53,41 @@ export function View({
           needs.
         </p>
 
-        <ul
-          role="list"
-          className="  my-4 flex flex-col items-center justify-center gap-20  text-left lg:flex-row "
+        <Transition
+          show={skillId == ''}
+          enter="transition-opacity duration-75"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-150"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          {staticTrends.map((skill) => (
-            <div key={skill['id']}>
-              <TrendChart skillName={skill['name']} skillTs={skill['trend']} />
-            </div>
-          ))}
-        </ul>
-        <div className="mt-10 flex justify-center gap-x-6">
-          <Search setSkillId={setSkillId} skillId={skillId} />
+          <ul
+            role="list"
+            className="  my-4 flex flex-col items-center justify-center gap-20  text-left lg:flex-row "
+          >
+            {staticTrends.map((skill) => (
+              <div key={skill['id']}>
+                <TrendChart
+                  skillName={skill['name']}
+                  skillTs={skill['trend']}
+                />
+              </div>
+            ))}
+          </ul>
+        </Transition>
+        {/* {skillId == '' &&
+            staticTrends.map((skill) => (
+              <div key={skill['id']}>
+                <TrendChart
+                  skillName={skill['name']}
+                  skillTs={skill['trend']}
+                />
+              </div>
+            ))} */}
+
+        <div className=" z-10 mt-10 flex justify-center gap-x-6">
+          <SearchNew setSkillId={setSkillId} skillId={skillId} />
         </div>
         {articleCount != 0 && (
           <p className="mt-10 text-2xl ">
