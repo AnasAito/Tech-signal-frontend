@@ -61,7 +61,7 @@ export function SearchNew({ setSkillId, skillId }) {
   }, [handleKeyPress])
   console.log('skills', !skills)
   return (
-    <div className=" mx-auto  w-full transform divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-xl bg-white text-left shadow-2xl ring-4   ring-yellow-600 ring-opacity-50   lg:w-3/4">
+    <div className=" mx-auto  w-full transform divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-xl bg-white text-left shadow-2xl ring-4 ring-yellow-600 ring-opacity-50   dark:divide-slate-900 dark:bg-slate-900   lg:w-3/4">
       <Combobox onChange={(item) => (window.location = item.url)}>
         <div className="relative">
           <MagnifyingGlassIcon
@@ -69,13 +69,14 @@ export function SearchNew({ setSkillId, skillId }) {
             aria-hidden="true"
           />
           <Combobox.Input
-            className="hidden h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm lg:block"
+            className="hidden h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 dark:text-white dark:placeholder-slate-50 sm:text-sm lg:block"
             placeholder="Try machine learning, sql, elasticsearch or any Skill or Tool ..."
             onChange={(event) => setQuery(event.target.value)}
           />
           <Combobox.Input
-            className=" h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm lg:hidden"
+            className=" h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 dark:text-white dark:placeholder-slate-50  sm:text-sm lg:hidden"
             placeholder="Try any Tech (sql,scalability) ..."
+            p
             onChange={(event) => setQuery(event.target.value)}
           />
         </div>
@@ -108,12 +109,12 @@ export function SearchNew({ setSkillId, skillId }) {
                   <ExclamationCircleIcon
                     type="outline"
                     name="exclamation-circle"
-                    className="mx-auto h-6 w-6 text-gray-400"
+                    className="mx-auto h-6 w-6 text-gray-400 dark:text-white"
                   />
                   <p className="mt-4 font-semibold text-gray-900">
                     No results found
                   </p>
-                  <p className="mt-2 text-gray-500">
+                  <p className="mt-2 text-gray-500 dark:text-white">
                     No skills found for this search term. Please try again.
                   </p>
                 </div>
@@ -133,7 +134,7 @@ export function SearchNew({ setSkillId, skillId }) {
                       className={({ active }) =>
                         classNames(
                           'flex cursor-default select-none rounded-xl p-3',
-                          active && 'bg-gray-100'
+                          active && 'bg-gray-100 dark:bg-gray-700'
                         )
                       }
                     >
@@ -154,7 +155,9 @@ export function SearchNew({ setSkillId, skillId }) {
                             <p
                               className={classNames(
                                 'text-sm font-medium',
-                                active ? 'text-gray-900' : 'text-gray-700'
+                                active
+                                  ? 'text-gray-900 dark:text-white '
+                                  : 'text-gray-700 dark:text-white'
                               )}
                             >
                               {item.name}
@@ -162,7 +165,9 @@ export function SearchNew({ setSkillId, skillId }) {
                             <p
                               className={classNames(
                                 'text-sm',
-                                active ? 'text-gray-700' : 'text-gray-500'
+                                active
+                                  ? 'text-gray-700  dark:text-gray-500'
+                                  : 'text-gray-500  dark:text-gray-500'
                               )}
                             >
                               {item.description}
