@@ -13,7 +13,7 @@ export default function Stats() {
   } = useQuery(Queries['stats.get.many'], {})
   console.log('stats data ', stats, errorStats)
   return (
-    <div className="flex min-h-screen flex-col  justify-between bg-slate-50 font-mono ">
+    <div className="flex min-h-screen flex-col bg-slate-50  justify-between  font-mono   dark:bg-slate-800 ">
       <Head>
         <title>TechSignal - find what to read fast</title>
         <meta

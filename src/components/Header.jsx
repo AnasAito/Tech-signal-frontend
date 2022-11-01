@@ -8,6 +8,8 @@ import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
+import { ModeToggle } from '@/components/ModeToggle'
+import { ModeToggleMobile } from '@/components/ModeToggleMobile'
 
 function MobileNavLink({ href, children }) {
   return (
@@ -80,6 +82,7 @@ function MobileNavigation() {
           >
             <MobileNavLink href="/about">About</MobileNavLink>
             <MobileNavLink href="/stats">Stats</MobileNavLink>
+            <MobileNavLink href ='' ><ModeToggleMobile/></MobileNavLink>
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
@@ -89,14 +92,14 @@ function MobileNavigation() {
 
 export function Header() {
   return (
-    <header className="bg-slate-50 py-4 font-mono">
+    <header className="bg-slate-50 dark:bg-slate-800 text-white dark:text-white py-4 font-mono">
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
             <Link href="/" aria-label="Home">
               <Logo className="h-10 w-auto" />
             </Link>
-            <div className="hidden md:flex md:gap-x-6">
+            <div className="hidden md:flex md:gap-x-6 ">
               <NavLink href="/about">About</NavLink>
               <NavLink href="/stats">Stats</NavLink>
             </div>
@@ -109,11 +112,12 @@ export function Header() {
               color="yellow"
             >
               <span>
-                <span className="hidden lg:inline"> Keep the App running!</span>
-                <span className="inline lg:hidden"> Sponsor me!</span>
+                {/* <span className="hidden lg:inline"> Keep the App running!</span> */}
+                <span className="inline"> Sponsor me!</span>
               </span>
             </Button>
-
+            <div className='hidden lg:inline'><ModeToggle/></div>
+            
             <div className="-mr-1 md:hidden">
               <MobileNavigation />
             </div>

@@ -12,8 +12,8 @@ export function ArticleCardSkeleton() {
   const lines = Array(n).fill(0)
   return (
     <div className="max-w-sm transform   animate-pulse cursor-pointer ">
-      <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-        <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
+      <figure className="relative rounded-2xl  p-6 shadow-xl shadow-slate-900/10 text-slate-900 dark:text-white bg-white dark:bg-slate-900">
+        <QuoteIcon className="absolute top-6 left-6 fill-slate-100 dark:fill-slate-800" />
 
         <blockquote className="relative">
           <div className=" mb-10 h-5 w-48 rounded-sm bg-gray-200 dark:bg-gray-500"></div>

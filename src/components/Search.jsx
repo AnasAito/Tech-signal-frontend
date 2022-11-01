@@ -5,6 +5,7 @@ import Queries from '../api/queries/index'
 import { Combobox, Dialog, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import ClipLoader from 'react-spinners/ClipLoader'
+
 import {
   CommandLineIcon,
   BriefcaseIcon,
@@ -42,6 +43,10 @@ export function Search({ setSkillId, skillId }) {
   // handle what happens on key press
   const handleKeyPress = useCallback((e) => {
     if (e.keyCode === 75 && e.metaKey) {
+      setOpen(!open)
+    }
+    
+    if (e.keyCode === 32 && e.ctrlKey) {
       setOpen(!open)
     }
   

@@ -38,26 +38,26 @@ export function ArticleCard({ article, key }) {
         rel="noreferrer"
         className="transform cursor-pointer  transition duration-500 ease-in-out hover:scale-105"
       >
-        <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-          <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
+        <figure className="relative rounded-2xl  p-6 shadow-xl shadow-slate-900/10 text-slate-900 dark:text-white bg-white dark:bg-slate-900">
+          <QuoteIcon className="absolute top-6 left-6 fill-slate-100 dark:fill-slate-800" />
           <blockquote className="relative">
-            <p className="mb-6 text-xl font-semibold text-gray-900">
+            <p className="mb-6 text-xl font-semibold ">
               {article.article_title}
             </p>
-            <p className="text-lg tracking-tight text-slate-900">
+            <p className="text-lg tracking-tight ">
               ... {render_occurence(article.occurence_text, article.skill)} ...
             </p>
           </blockquote>
           <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
             <div>
-              <div className="font-display text-base text-slate-900">
+              <div className="font-display text-base ">
                 {get(logo_mapper, article.company_id, defaultCompany).name}
               </div>
-              <div className="mt-1 text-sm text-slate-500">
+              <div className="mt-1 text-sm ">
                 {article.article_date == '' ? '2022' : article.article_date}
               </div>
             </div>
-            <div className="overflow-hidden rounded-full bg-slate-50">
+            <div className="overflow-hidden rounded-full bg-slate-50 dark:bg-slate-900">
               <Image
                 className="h-14 w-14 object-cover"
                 src={get(logo_mapper, article.company_id, defaultCompany).logo}

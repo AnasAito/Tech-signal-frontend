@@ -21,13 +21,13 @@ export function View({
     <section
       // id="testimonials"
       // aria-label="What our customers are saying"
-      className="bg-slate-50  font-mono"
+      className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-mono"
     >
       <Banner show={show} setShow={setShow} />
       <Container className="pt-5 pb-16 text-center lg:pt-10">
         <h1
           onClick={() => setSkillId('')}
-          className=" mx-auto max-w-4xl cursor-pointer font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl"
+          className=" mx-auto max-w-4xl cursor-pointer font-display text-5xl font-medium tracking-tight   sm:text-7xl"
         >
           Tech{' '}
           <span className="relative whitespace-nowrap text-yellow-600">
@@ -42,9 +42,9 @@ export function View({
             <span className="relative">Signal</span>
           </span>
         </h1>
-        <p className="mx-auto mt-6 mb-10 max-w-4xl text-2xl  text-slate-700">
+        <p className="mx-auto mt-6 mb-10 max-w-4xl text-2xl  text-slate-700 dark:text-slate-400">
           We annotate and index articles from{' '}
-          <span className="font-bold text-black">
+          <span className="font-bold text-black dark:text-white">
             companies' tech blogs with tech skills and tools
           </span>{' '}
           so you can find quickly relevant and real-life content that suits your
