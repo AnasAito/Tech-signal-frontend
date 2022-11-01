@@ -24,7 +24,7 @@ export function ArticleCardSkeleton() {
             ></div>
           ))}
         </blockquote>
-        <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
+        <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-6">
           <div>
             <div className="mb-2 h-2.5 w-32 rounded-full bg-gray-200 dark:bg-gray-500"></div>
             <div className="h-2  w-20 rounded-full bg-gray-200 dark:bg-gray-500"></div>

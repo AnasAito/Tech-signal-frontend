@@ -48,7 +48,7 @@ export function ArticleCard({ article, key }) {
               ... {render_occurence(article.occurence_text, article.skill)} ...
             </p>
           </blockquote>
-          <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
+          <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-6">
             <div>
               <div className="font-display text-base ">
                 {get(logo_mapper, article.company_id, defaultCompany).name}
