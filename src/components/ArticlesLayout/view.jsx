@@ -23,7 +23,7 @@ export function View({
     <section
       // id="testimonials"
       // aria-label="What our customers are saying"
-      className=" z-0  bg-slate-50 font-mono text-slate-900 dark:bg-slate-800 dark:text-white"
+      className="  bg-slate-50 font-mono text-slate-900 dark:bg-slate-800 dark:text-white"
     >
       <Banner show={show} setShow={setShow} />
       <Container className="pt-5 pb-16 text-center lg:pt-10">

@@ -27,8 +27,8 @@ export default function Home() {
   //   'LaddHnRyCgECD2Y3hd2zVpTxlZPuvBic0S2ucvnd1YQX0ynOLHyyjpxAT13HhGvN'
   // )
   return (
-    <div className="flex min-h-screen flex-col ">
-      <Head>   
+    <div className="flex min-h-screen flex-col  justify-between bg-slate-50 dark:bg-slate-800 ">
+      <Head>
         <title>TechSignal - find what to read fast</title>
         <meta
           name="description"
