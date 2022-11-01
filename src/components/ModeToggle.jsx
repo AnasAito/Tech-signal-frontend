@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 
   
   function SunIcon(props) {
@@ -49,11 +50,12 @@ export   function ModeToggle() {
   
       if (isDarkMode === isSystemDarkMode) {
         delete window.localStorage.isDarkMode
+       
       } else {
         window.localStorage.isDarkMode = isDarkMode
       }
     }
-  
+
     return (
       <button
         type="button"
