@@ -97,9 +97,13 @@ export function SearchNew({ setSkillId, skillId }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="flex flex-col items-center py-6">
+            <div className="flex  flex-col  items-center py-6 dark:hidden">
               {' '}
               <ClipLoader />
+            </div>
+            <div className="hidden flex-col   items-center py-6  dark:flex">
+              {' '}
+              <ClipLoader color="white" />
             </div>
           </Transition>
           {skills && (
